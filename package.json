@@ -1,0 +1,20 @@
+{
+  "name": "homeworknodejs",
+  "version": "1.0.0",
+  "description": "homeworknodejs",
+  "main": "package.json",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BorodaiMaksim/test"
+  },
+  "author": "BorodaiMaksim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BorodaiMaksim/test"
+  },
+  "homepage": "https://github.com/BorodaiMaksim/test/blob/main/README.md"
+}
