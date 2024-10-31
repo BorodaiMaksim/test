@@ -4,7 +4,7 @@ import UsersRouter from './routes/UserRouter.js';
 import ItemsRouter from './routes/ItemsRouter.js';
 import OrdersRouter from './routes/OrdersRouter.js';
 import {logger} from './middlewares/logger.js';
-const PORT = 3000;
+const PORT = 3001;
 const DATABASE_URL = 'mongodb://localhost:27017/node-api';
 
 const server = express();

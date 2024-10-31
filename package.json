@@ -2,20 +2,29 @@
   "name": "homeworknodejs",
   "version": "1.0.0",
   "description": "homeworknodejs",
-  "main": "package.json",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "npx nodemon index.js"
   },
-  
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BorodaiMaksim/test"
+    "url": "https://github.com/BorodaiMaksim/test"
   },
   "author": "BorodaiMaksim",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BorodaiMaksim/test"
+    "url": "https://github.com/BorodaiMaksim/test/issues"
   },
-  "homepage": "https://github.com/BorodaiMaksim/test/blob/main/README.md"
+  "homepage": "https://github.com/BorodaiMaksim/test#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.0"
+  }
 }

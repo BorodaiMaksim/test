@@ -1,6 +1,6 @@
 import express from 'express';
 import Users from '../models/users.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET, Roles } from '../constants.js';
 
