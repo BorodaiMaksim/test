@@ -30,6 +30,9 @@ router.post('/create-order', async (req, res) => {
     if (!item) {
         return res.status(400).send({error: 'Item not found'});
     }
+    if (!quantity) {
+        return res.status(400).send({error: 'At least 1 item is required!'});
+    }
     const order = await Orders.findOne({_id: orderId, userId: user.id});
     if (!order || order.status !== orderStatus.NONE) {
         const totalPrice = item.price * quantity;
@@ -39,9 +42,7 @@ router.post('/create-order', async (req, res) => {
             totalPrice: totalPrice,
         })
         return res.status(200).send(newOrder);
-    }
-    else
-    {
+    } else {
         const existingItemIndex = order.items.findIndex(i => i.itemId.toString() === itemId);
         let updatedOrder;
         if (existingItemIndex > -1) {
