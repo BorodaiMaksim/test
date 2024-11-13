@@ -2,7 +2,7 @@ import express from 'express';
 import Orders from '../models/orders.js';
 import authChecker from "../middlewares/authChecker.js";
 import Items from "../models/items.js";
-import {orderStatus, Roles} from "../constants.js";
+import {orderStatus, Roles as roles, Roles} from "../constants.js";
 
 const router = express.Router();
 
@@ -175,7 +175,7 @@ router.patch("/confirm-order-user", async (req, res) => {
 router.patch("/change-status-admin", async (req, res) => {
     const user = await authChecker(req, res);
     if (user && user.role !== Roles.ADMIN) {
-        return res.status(403).send({ error: 'Operation not allowed' });
+        return res.status(403).send({error: 'Operation not allowed'});
     }
     const {orderId, status} = req.body;
     if (!orderId) {
@@ -191,6 +191,39 @@ router.patch("/change-status-admin", async (req, res) => {
             userId: user.id
         }, {status: status}, {new: true});
         res.status(200).send(updatedOrder);
+    } catch (err) {
+        res.status(500).send({error: err.message});
+    }
+})
+router.delete("/delete-order", async (req, res) => {
+    const user = await authChecker(req, res);
+    if (!user) {
+        return res.status(401).send({error: 'You are not logged in!'});
+    }
+    const {orderId} = req.body;
+    try {
+        await Orders.findByIdAndDelete(orderId);
+        res.status(200).send({message: "Order deleted successfully"});
+    } catch (err) {
+        res.status(500).send({error: err.message})
+    }
+})
+router.post("/find-orderById", async (req, res) => {
+    const user = await authChecker(req, res);
+    if (!user) {
+        return res.status(404).send({error: 'You are not logged in!'});
+    }
+    const {orderId} = req.body;
+    if (!orderId) {
+        res.status(400).send({error: 'Order id is required!'});
+    }
+    try {
+        const order = await Orders.findById(orderId);
+        if (user.id === order.userId || user.role === roles.ADMIN) {
+            res.status(200).send(order);
+        } else {
+            return res.status(403).send({error: "Operation not allowed!"})
+        }
     } catch (err) {
         res.status(500).send({error: err.message});
     }
